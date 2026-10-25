@@ -104,13 +104,36 @@ export default function LandingHeroBanner() {
             <Equalizer isPlaying={true} className="h-4" />
           </div>
 
-          <div className="mb-3">
-            <div className="text-xs text-white/60 font-medium">Currently Playing Vibe:</div>
-            <div className="text-sm sm:text-base font-bold text-white truncate mt-0.5">
-              {currentTrack ? `"${currentTrack.title}"` : 'Selecting Track...'}
-            </div>
-            <div className="text-xs text-amber-300 font-semibold truncate">
-              {currentTrack?.artist || effectiveMood.replace('-', ' ')}
+          <div className="mb-3 flex items-center gap-3">
+            {currentTrack?.coverUrl && (
+              <a
+                href={currentTrack.appleMusicUrl || currentTrack.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative w-12 h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg shrink-0 group block"
+                title={`Listen to ${currentTrack.title}`}
+              >
+                <img
+                  src={currentTrack.coverUrl}
+                  alt={currentTrack.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                />
+              </a>
+            )}
+            <div className="truncate min-w-0">
+              <div className="text-[11px] text-white/60 font-medium">Currently Playing Vibe:</div>
+              <a
+                href={currentTrack?.appleMusicUrl || currentTrack?.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm font-bold text-white hover:text-amber-300 transition-colors truncate block mt-0.5"
+                title={`Open "${currentTrack?.title}" song`}
+              >
+                {currentTrack ? `"${currentTrack.title}"` : 'Selecting Track...'}
+              </a>
+              <div className="text-[11px] text-amber-300 font-semibold truncate">
+                {currentTrack?.artist || effectiveMood.replace('-', ' ')}
+              </div>
             </div>
           </div>
 
