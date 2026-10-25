@@ -109,10 +109,11 @@ export default function Navbar() {
               </div>
               <button
                 onClick={logout}
-                className="p-2 rounded-xl bg-white/10 hover:bg-red-500/20 text-white/80 hover:text-red-200 border border-white/15 transition-all"
-                title="Sign out"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/20 text-white/80 hover:text-red-200 border border-white/15 transition-all text-xs font-semibold cursor-pointer"
+                title="Sign out to Login Page"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Sign Out</span>
               </button>
             </div>
           ) : (

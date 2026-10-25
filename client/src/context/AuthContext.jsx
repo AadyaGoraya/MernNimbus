@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('nimbus_token'));
   const [isGuest, setIsGuest] = useState(() => localStorage.getItem('nimbus_guest') === 'true');
+  const [sessionEntered, setSessionEntered] = useState(() => sessionStorage.getItem('nimbus_session_entered_v2') === 'true');
   const [units, setUnits] = useState(() => localStorage.getItem('nimbus_units') || 'metric');
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -43,6 +44,11 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [token]);
 
+  const enterApp = () => {
+    sessionStorage.setItem('nimbus_session_entered_v2', 'true');
+    setSessionEntered(true);
+  };
+
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
     if (res.success && res.data) {
@@ -55,7 +61,8 @@ export function AuthProvider({ children }) {
         localStorage.setItem('nimbus_units', newUser.units);
       }
       setIsAuthModalOpen(false);
-      toast.success(`Welcome back, ${newUser.username}!`);
+      enterApp();
+      toast.success(`Welcome back, ${newUser.username}! 🎵`);
       return newUser;
     }
     throw new Error('Login failed');
@@ -76,7 +83,8 @@ export function AuthProvider({ children }) {
       setUnits(newUser.units);
       localStorage.setItem('nimbus_units', newUser.units);
       setIsAuthModalOpen(false);
-      toast.success(`Account created! Welcome to Nimbus, ${newUser.username}!`);
+      enterApp();
+      toast.success(`Account created! Welcome to Nimbus, ${newUser.username}! 🎧`);
       return newUser;
     }
     throw new Error('Registration failed');
@@ -85,15 +93,18 @@ export function AuthProvider({ children }) {
   const enterAsGuest = () => {
     localStorage.setItem('nimbus_guest', 'true');
     setIsGuest(true);
+    enterApp();
     toast.success('Welcome! Exploring Nimbus as Guest 🎧');
   };
 
   const logout = () => {
     localStorage.removeItem('nimbus_token');
     localStorage.removeItem('nimbus_guest');
+    sessionStorage.removeItem('nimbus_session_entered_v2');
     setToken(null);
     setUser(null);
     setIsGuest(false);
+    setSessionEntered(false);
     toast.success('Signed out. See you under the open sky!');
   };
 
@@ -118,6 +129,9 @@ export function AuthProvider({ children }) {
 
   const closeAuthModal = () => setIsAuthModalOpen(false);
 
+  // hasAccess is true only when the user has entered the app (via login, register, or guest choice)
+  const hasAccess = Boolean(sessionEntered && ((user && token) || isGuest));
+
   return (
     <AuthContext.Provider
       value={{
@@ -126,13 +140,15 @@ export function AuthProvider({ children }) {
         units,
         isLoading,
         isGuest,
-        hasAccess: Boolean((user && token) || isGuest),
+        sessionEntered,
+        hasAccess,
         isAuthenticated: Boolean(user && token),
         isAuthModalOpen,
         authModalAction,
         login,
         register,
         logout,
+        enterApp,
         enterAsGuest,
         updateUnits,
         promptLogin,
