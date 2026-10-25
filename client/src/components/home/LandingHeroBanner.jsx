@@ -116,6 +116,7 @@ export default function LandingHeroBanner() {
                 <img
                   src={currentTrack.coverUrl}
                   alt={currentTrack.title}
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                 />
               </a>

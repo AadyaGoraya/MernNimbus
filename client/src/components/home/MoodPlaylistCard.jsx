@@ -156,6 +156,7 @@ export default function MoodPlaylistCard() {
                     src={track.coverUrl}
                     alt={`${track.title} cover`}
                     loading="lazy"
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     onError={(e) => {
                       e.target.onerror = null;
