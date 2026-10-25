@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Music, Shuffle, ExternalLink, Play, Pause, Disc, Radio } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Music2, Shuffle, Play, Pause, ExternalLink } from 'lucide-react';
 import { useWeather } from '../../context/WeatherContext';
 import { PlaylistSkeleton } from '../common/Skeleton';
 import Equalizer from '../common/Equalizer';
@@ -17,7 +17,6 @@ export default function MoodPlaylistCard() {
   const [playingTrackId, setPlayingTrackId] = useState(null);
   const audioRef = useRef(null);
 
-  // Stop audio if playlist or mood changes
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -28,7 +27,6 @@ export default function MoodPlaylistCard() {
 
   const togglePlayTrack = (track) => {
     if (!track.previewUrl) {
-      // Fallback: If no preview audio, open direct song link in new tab
       window.open(track.appleMusicUrl || track.spotifyUrl || track.youtubeUrl, '_blank');
       return;
     }
@@ -73,91 +71,69 @@ export default function MoodPlaylistCard() {
   }
 
   return (
-    <div className="glass-panel rounded-3xl p-5 sm:p-6 border border-white/20 shadow-2xl relative overflow-hidden">
-      {/* Ambient background glow */}
-      <div
-        className="absolute -left-10 -bottom-10 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: 'var(--accent)' }}
-      />
-
+    <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/[0.08] relative overflow-hidden shadow-2xl">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/[0.06]">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <div className="p-1.5 rounded-lg bg-amber-400/20 text-amber-300">
-              <Music className="w-4 h-4" />
-            </div>
-            <span className="text-xs uppercase tracking-wider font-bold text-amber-300 flex items-center gap-2">
-              <span>Sky Mixtape • 8 Curated Tracks</span>
-              <Equalizer isPlaying={Boolean(playingTrackId)} className="h-3" />
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-[11px] uppercase tracking-wider font-mono font-semibold text-slate-400">
+              Curated Soundtrack · 8 Tracks
             </span>
+            {playingTrackId && <Equalizer isPlaying={true} className="h-3 text-amber-400" />}
           </div>
-          <h3 className="font-serif text-xl sm:text-2xl font-light text-white tracking-wide capitalize">
-            {effectiveMood.replace('-', ' ')} Vibe
+          <h3 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide capitalize">
+            {effectiveMood.replace('-', ' ')} Atmosphere
           </h3>
-          <p className="text-xs sm:text-sm text-white/90 italic mt-0.5 font-serif">
+          <p className="text-xs sm:text-sm text-slate-400 italic mt-0.5">
             "{playlistData.tagline}"
           </p>
         </div>
 
-        {/* "Shuffle Vibe" Button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        {/* Shuffle Button */}
+        <button
           onClick={shuffleVibeTrack}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-white/20 hover:bg-white/30 border border-white/30 text-white text-xs font-semibold shadow-lg transition-all active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
+          className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 text-xs font-medium transition-all active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
         >
-          <Shuffle className="w-3.5 h-3.5 text-amber-300 animate-spin-slow" />
-          <span>Shuffle Vibe</span>
-        </motion.button>
+          <Shuffle className="w-3.5 h-3.5 text-slate-400" />
+          <span>Shuffle Track</span>
+        </button>
       </div>
 
-      {/* 8 Curated Tracks List */}
-      <div className="space-y-3">
+      {/* Track List */}
+      <div className="space-y-1.5">
         {playlistData.tracks.map((track, index) => {
           const isHighlighted = highlightedTrack === track.id;
           const isPlaying = playingTrackId === track.id;
 
           return (
-            <motion.div
+            <div
               key={track.id}
-              animate={
-                isHighlighted || isPlaying
-                  ? {
-                      scale: [1, 1.015, 1],
-                      boxShadow: isPlaying
-                        ? '0 0 25px rgba(251, 191, 36, 0.45)'
-                        : '0 0 20px rgba(251, 191, 36, 0.3)',
-                    }
-                  : {}
-              }
-              transition={{ duration: 0.4 }}
-              className={`flex items-center justify-between gap-3 p-3 rounded-2xl transition-all border ${
+              className={`flex items-center justify-between gap-3 p-2.5 sm:p-3 rounded-2xl transition-all border ${
                 isPlaying
-                  ? 'bg-amber-400/25 border-amber-300/60 shadow-lg'
+                  ? 'bg-white/[0.08] border-amber-400/40 shadow-md'
                   : isHighlighted
-                  ? 'bg-amber-400/20 border-amber-300/50'
-                  : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                  ? 'bg-white/[0.06] border-white/20'
+                  : 'bg-transparent border-transparent hover:bg-white/[0.04]'
               }`}
             >
-              {/* Left Side: Index + Cover Image + Play Overlay + Title/Artist */}
+              {/* Left Side: Index + Cover + Title/Artist */}
               <div className="flex items-center gap-3 min-w-0">
-                <span className="text-xs font-mono font-bold text-white/40 w-4 text-center shrink-0">
+                <span className="text-xs font-mono text-slate-400 w-4 text-center shrink-0">
                   {index + 1}
                 </span>
 
-                {/* Album Cover Art with interactive Play/Pause Overlay */}
+                {/* Album Cover Art */}
                 <div
                   onClick={() => togglePlayTrack(track)}
-                  className="relative w-12 h-12 rounded-xl overflow-hidden border border-white/20 shadow-md shrink-0 cursor-pointer group bg-slate-900"
-                  title={isPlaying ? 'Pause Preview' : 'Play 30s Preview'}
+                  className="relative w-11 h-11 rounded-xl overflow-hidden border border-white/[0.08] shadow-sm shrink-0 cursor-pointer group bg-slate-900"
+                  title={isPlaying ? 'Pause' : 'Play preview'}
                 >
                   <img
                     src={track.coverUrl}
                     alt={`${track.title} cover`}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src =
@@ -165,23 +141,18 @@ export default function MoodPlaylistCard() {
                     }}
                   />
 
-                  {/* Dark Play Overlay */}
+                  {/* Play Overlay */}
                   <div
-                    className={`absolute inset-0 flex items-center justify-center transition-all ${
+                    className={`absolute inset-0 flex items-center justify-center transition-opacity ${
                       isPlaying
                         ? 'bg-black/60 opacity-100'
                         : 'bg-black/40 opacity-0 group-hover:opacity-100'
                     }`}
                   >
                     {isPlaying ? (
-                      <div className="flex flex-col items-center justify-center">
-                        <Equalizer isPlaying={true} barCount={3} className="h-4" />
-                        <Pause className="w-3.5 h-3.5 text-amber-300 mt-0.5 fill-current" />
-                      </div>
+                      <Pause className="w-4 h-4 text-amber-300 fill-current" />
                     ) : (
-                      <div className="w-6 h-6 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg pl-0.5">
-                        <Play className="w-3 h-3 fill-current" />
-                      </div>
+                      <Play className="w-4 h-4 text-white fill-current ml-0.5" />
                     )}
                   </div>
                 </div>
@@ -192,42 +163,32 @@ export default function MoodPlaylistCard() {
                     href={track.appleMusicUrl || track.spotifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-sm font-semibold text-white hover:text-amber-300 transition-colors truncate flex items-center gap-2"
-                    title={`Open "${track.title}" directly`}
+                    className="text-xs sm:text-sm font-semibold text-white hover:text-amber-300 transition-colors truncate block"
+                    title={`Open "${track.title}"`}
                   >
-                    <span className="truncate">{track.title}</span>
-                    {isPlaying && (
-                      <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-400 text-slate-950 font-bold uppercase tracking-wider animate-pulse shrink-0">
-                        Playing 🎧
-                      </span>
-                    )}
-                    {isHighlighted && !isPlaying && (
-                      <span className="px-1.5 py-0.2 rounded text-[9px] bg-amber-400 text-slate-950 font-bold uppercase shrink-0">
-                        Current Vibe
-                      </span>
-                    )}
+                    {track.title}
                   </a>
-                  <div className="text-[11px] text-white/70 truncate flex items-center gap-1.5 mt-0.5">
-                    <span>{track.artist}</span>
-                    <span className="text-white/30">•</span>
-                    <span className="font-mono text-white/50">{track.duration}</span>
+                  <div className="text-[11px] text-slate-400 truncate mt-0.5">
+                    {track.artist}
                   </div>
                 </div>
               </div>
 
-              {/* Action Buttons: Play/Pause Preview + Spotify Song + YouTube Song */}
-              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                {/* 1-Click In-App Preview Audio Toggle */}
+              {/* Right Side: Preview Button & Direct Service Links */}
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-[11px] font-mono text-slate-400 hidden sm:inline mr-1">
+                  {track.duration}
+                </span>
+
                 {track.previewUrl && (
                   <button
                     type="button"
                     onClick={() => togglePlayTrack(track)}
-                    className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer shadow-sm ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
                       isPlaying
-                        ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-amber-400/30'
-                        : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                        ? 'bg-amber-400 text-slate-950 border-amber-300 font-semibold'
+                        : 'bg-white/[0.04] hover:bg-white/[0.1] text-slate-200 border-white/[0.06]'
                     }`}
-                    title={isPlaying ? 'Pause song preview' : 'Play 30s song preview'}
                   >
                     {isPlaying ? (
                       <>
@@ -243,33 +204,29 @@ export default function MoodPlaylistCard() {
                   </button>
                 )}
 
-                {/* Spotify Outbound Link (points directly to Song / Track search) */}
+                {/* Spotify Link */}
                 <a
                   href={track.spotifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#1DB954]/20 hover:bg-[#1DB954]/35 text-[#1DB954] border border-[#1DB954]/40 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow-sm"
-                  title={`Open "${track.title}" song on Spotify`}
+                  className="px-2.5 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] text-slate-300 hover:text-emerald-400 border border-white/[0.06] text-xs font-medium transition-all"
+                  title="Open on Spotify"
                 >
-                  <Play className="w-3 h-3 fill-current" />
-                  <span className="hidden xs:inline">Spotify</span>
-                  <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                  Spotify
                 </a>
 
-                {/* YouTube Outbound Link (points directly to Song Video) */}
+                {/* YouTube Link */}
                 <a
                   href={track.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#FF0000]/20 hover:bg-[#FF0000]/35 text-[#FF6B6B] border border-[#FF0000]/40 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow-sm"
-                  title={`Watch "${track.title}" song video on YouTube`}
+                  className="px-2.5 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] text-slate-300 hover:text-red-400 border border-white/[0.06] text-xs font-medium transition-all"
+                  title="Open on YouTube"
                 >
-                  <Play className="w-3 h-3 fill-current" />
-                  <span className="hidden xs:inline">YouTube</span>
-                  <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                  YouTube
                 </a>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

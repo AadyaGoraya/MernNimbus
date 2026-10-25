@@ -318,22 +318,20 @@ export function WeatherProvider({ children }) {
         } else if (error.code === error.TIMEOUT) {
           msg = 'Location request timed out. Please try again.';
         }
-        toast(msg, { icon: '📍' });
+        toast(msg);
       },
       { timeout: 10000, enableHighAccuracy: false }
     );
   };
 
-  // Shuffle Vibe Track
+  // Pick Featured Track
   const shuffleVibeTrack = () => {
     if (!playlistData?.tracks || playlistData.tracks.length === 0) return;
     const randomIndex = Math.floor(Math.random() * playlistData.tracks.length);
     const chosenTrack = playlistData.tracks[randomIndex];
     setHighlightedTrack(chosenTrack.id);
 
-    toast.success(`Vibe picked: "${chosenTrack.title}" by ${chosenTrack.artist}`, {
-      icon: '✨',
-    });
+    toast.success(`Selected track: "${chosenTrack.title}" — ${chosenTrack.artist}`);
 
     // Clear highlight after 4 seconds
     setTimeout(() => {

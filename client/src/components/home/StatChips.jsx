@@ -1,5 +1,5 @@
 import React from 'react';
-import { Droplets, Wind, CloudRain, Sunrise, Sunset } from 'lucide-react';
+import { Droplets, Wind, CloudRain, Sunrise } from 'lucide-react';
 import { useWeather } from '../../context/WeatherContext';
 import { useAuth } from '../../context/AuthContext';
 import { formatWindSpeed, formatPrecipitation } from '../../utils/units';
@@ -15,7 +15,6 @@ export default function StatChips() {
   const wind = formatWindSpeed(cur?.windSpeed, units);
   const precipitation = formatPrecipitation(cur?.precipitation, units);
 
-  // Parse sunrise & sunset
   const formatSunTime = (isoString) => {
     if (!isoString) return '--:--';
     try {
@@ -35,35 +34,31 @@ export default function StatChips() {
   const stats = [
     {
       id: 'humidity',
-      label: 'Air Moisture',
+      label: 'Humidity',
       value: humidity,
-      subtext: cur?.humidity > 70 ? 'Muggy & steamy 💧' : cur?.humidity < 35 ? 'Crisp & dry 🍃' : 'Super comfortable ✨',
+      subtext: cur?.humidity > 70 ? 'High moisture level' : cur?.humidity < 35 ? 'Dry conditions' : 'Normal comfort range',
       icon: Droplets,
-      color: 'text-sky-300',
     },
     {
       id: 'wind',
-      label: 'Breeze Factor',
+      label: 'Wind',
       value: wind,
-      subtext: cur?.windSpeed > 30 ? 'Hair-wrecking gusts 💨' : 'Gentle ambient breeze 🍃',
+      subtext: cur?.windSpeed > 25 ? 'Moderate to gusty air' : 'Gentle surface air',
       icon: Wind,
-      color: 'text-teal-300',
     },
     {
       id: 'precipitation',
-      label: 'Rain Check',
+      label: 'Precipitation',
       value: precipitation,
-      subtext: cur?.precipitation > 0 ? 'Umbrella needed! ☔' : 'Clear skies ahead ☀️',
+      subtext: cur?.precipitation > 0 ? 'Active precipitation' : 'No rain recorded',
       icon: CloudRain,
-      color: 'text-blue-300',
     },
     {
       id: 'solar',
-      label: 'Sun Schedule',
-      value: `${sunriseTime}`,
-      subtext: `Sunset at ${sunsetTime} 🌇`,
+      label: 'Sun Cycle',
+      value: sunriseTime,
+      subtext: `Sunset at ${sunsetTime}`,
       icon: Sunrise,
-      color: 'text-amber-300',
     },
   ];
 
@@ -74,20 +69,18 @@ export default function StatChips() {
         return (
           <div
             key={stat.id}
-            className="glass-panel rounded-2xl p-4 sm:p-5 border border-white/15 relative overflow-hidden group hover:border-white/30 transition-all shadow-lg"
+            className="glass-panel rounded-2xl p-4 sm:p-5 border border-white/[0.08] relative overflow-hidden transition-all hover:border-white/20"
           >
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[11px] uppercase tracking-wider text-white/70 font-bold">
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold font-mono">
                 {stat.label}
               </span>
-              <div className="p-2 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
-                <Icon className={`w-4 h-4 ${stat.color}`} />
-              </div>
+              <Icon className="w-4 h-4 text-slate-400" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight">
               {stat.value}
             </div>
-            <div className="text-[11px] text-white/60 truncate mt-0.5">
+            <div className="text-xs text-slate-400 truncate mt-1">
               {stat.subtext}
             </div>
           </div>

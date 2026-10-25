@@ -62,7 +62,7 @@ export function AuthProvider({ children }) {
       }
       setIsAuthModalOpen(false);
       enterApp();
-      toast.success(`Welcome back, ${newUser.username}! 🎵`);
+      toast.success(`Welcome back, ${newUser.username}`);
       return newUser;
     }
     throw new Error('Login failed');
@@ -84,7 +84,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem('nimbus_units', newUser.units);
       setIsAuthModalOpen(false);
       enterApp();
-      toast.success(`Account created! Welcome to Nimbus, ${newUser.username}! 🎧`);
+      toast.success(`Account created. Welcome to Nimbus, ${newUser.username}`);
       return newUser;
     }
     throw new Error('Registration failed');
@@ -94,7 +94,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem('nimbus_guest', 'true');
     setIsGuest(true);
     enterApp();
-    toast.success('Welcome! Exploring Nimbus as Guest 🎧');
+    toast.success('Browsing Nimbus as Guest');
   };
 
   const logout = () => {

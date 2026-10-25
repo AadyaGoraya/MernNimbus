@@ -32,14 +32,14 @@ export default function HourlyStrip() {
     <div className="glass-panel rounded-3xl p-5 sm:p-6 border border-white/20 my-6 shadow-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-white/10 text-amber-300">
+          <div className="p-1.5 rounded-lg bg-white/10 text-white/70">
             <TrendingUp className="w-4 h-4" />
           </div>
           <h3 className="font-serif text-lg sm:text-xl font-light text-white tracking-wide">
-            Today's Sky Wave & Hourly Curve 📈
+            Hourly Forecast & Atmospheric Trend
           </h3>
         </div>
-        <span className="text-xs text-white/60 font-medium">Next 24 Hours</span>
+        <span className="text-xs text-white/50 font-medium">Next 24 Hours</span>
       </div>
 
       {/* Horizontally Scrollable 24h Cards */}

@@ -9,33 +9,32 @@ import { THEME_PALETTES } from '../utils/themePalettes';
 import WeatherIcon from '../components/common/WeatherIcon';
 
 /**
- * Generate a witty & stylish "Fit Check" tip based on temperature (Celsius) and atmospheric mood
+ * Generate practical meteorological attire advisory based on conditions
  */
 function getDressTip(celsius, mood = 'clear-day') {
   if (mood === 'thunderstorm') {
-    return 'Black leather jacket or techwear shell, noise-cancelling headphones on blast, and stay sheltered ⚡';
+    return 'Waterproof outer shell required. Severe weather advisory: stay sheltered from lightning and heavy gusts.';
   }
   if (mood === 'rain') {
-    return 'Oversized trench coat, chunky waterproof boots, umbrella, and a melancholy indie playlist 🌧️';
+    return 'Water-repellent trench or raincoat with sealed footwear. High probability of surface runoff.';
   }
   if (mood === 'snow') {
-    return 'Puffer jacket, oversized cashmere scarf, fleece beanie, and a hot flat white in hand ❄️';
+    return 'Sub-freezing insulation: heavy down parka, thermal base layers, and windproof winter gloves.';
   }
   if (mood === 'fog') {
-    return 'Dark academia wool overcoat, cozy ribbed turtleneck, and main-character mystery energy 🌫️';
+    return 'Low visibility conditions. Light moisture-resistant outer layer and reflective elements advised.';
   }
 
-  // Temperature based tips for clear / cloudy
   if (celsius >= 30) {
-    return 'Loose breathable linen, vintage sunglasses, iced cold brew, and breezy summer bops ☀️';
+    return 'High heat conditions. Light breathable fabrics, hydration, and UV eye protection recommended.';
   } else if (celsius >= 22) {
-    return 'Graphic tee, relaxed denim, clean sneakers, and pure golden hour energy ✨';
+    return 'Optimal ambient temperature. Light, comfortable single-layer attire suitable for outdoor exposure.';
   } else if (celsius >= 15) {
-    return 'Comfy oversized hoodie or bomber jacket over a tee. Peak music walk weather ☕';
+    return 'Mild cool conditions. Mid-weight layer, sweater, or light jacket recommended for prolonged exposure.';
   } else if (celsius >= 8) {
-    return 'Heavy wool trench, chunky knit sweater, Chelsea boots, and warm vibes 🧣';
+    return 'Cold air mass. Wool overcoat, knitwear, and wind-resistant layering recommended.';
   } else {
-    return 'Full winter armor: heavy down parka, thermal base layers, and zero exposed skin 🧊';
+    return 'Freezing temperatures. Thermal insulation, heavy coat, and head protection required.';
   }
 }
 
@@ -113,22 +112,22 @@ export default function ComparePage() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6">
       {/* Header */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-amber-300 mb-1">
-          <SplitSquareVertical className="w-4 h-4" />
-          <span>Vibe Clash ⚡</span>
+      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/[0.08] shadow-xl">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-mono font-semibold text-slate-400 mb-1.5">
+          <SplitSquareVertical className="w-3.5 h-3.5" />
+          <span>Meteorological Analysis</span>
         </div>
-        <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-wide">
-          City vs City
+        <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-tight">
+          Climate & Atmosphere Comparison
         </h1>
-        <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-xl">
-          Side-by-side weather & soundtrack faceoff. Check the vibe, the temp, and the fit check before packing your bag.
+        <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+          Side-by-side barometric, temperature, and soundtrack comparison across your tracked locations.
         </p>
 
         {/* City Selector Pills */}
         {isAuthenticated && favorites.length > 0 && (
           <div className="mt-5 pt-4 border-t border-white/10">
-            <span className="text-[11px] uppercase tracking-wider text-white/60 font-bold block mb-2.5">
+            <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block mb-2.5">
               Select 2 or 3 saved cities to compare ({selectedIds.length}/3 selected):
             </span>
             <div className="flex flex-wrap gap-2">
@@ -138,10 +137,10 @@ export default function ComparePage() {
                   <button
                     key={f._id}
                     onClick={() => toggleSelectCity(f._id)}
-                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
                       isSelected
-                        ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
-                        : 'bg-white/10 hover:bg-white/20 text-white/80'
+                        ? 'bg-white text-slate-950 font-semibold shadow-md'
+                        : 'bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 border border-white/[0.08]'
                     }`}
                   >
                     {isSelected && <Check className="w-3.5 h-3.5" />}
@@ -156,19 +155,19 @@ export default function ComparePage() {
 
       {/* Guest Mode Gate */}
       {!isAuthenticated && (
-        <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-amber-400/30 shadow-xl">
-          <AlertCircle className="w-10 h-10 text-amber-300 mx-auto mb-3" />
+        <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-white/10 shadow-xl">
+          <AlertCircle className="w-10 h-10 text-white/60 mx-auto mb-3" />
           <h2 className="font-serif text-xl sm:text-2xl font-light text-white mb-2">
-            Sign In to Compare Cities
+            Sign In to Compare Locations
           </h2>
-          <p className="text-xs sm:text-sm text-white/70 max-w-md mx-auto mb-6">
-            Log in to pick and analyze your personal favorite cities side-by-side.
+          <p className="text-xs sm:text-sm text-white/60 max-w-md mx-auto mb-6">
+            Log in to select and cross-analyze your saved locations side-by-side.
           </p>
           <button
             onClick={() => promptLogin('compare weather across your saved cities')}
-            className="px-6 py-3 rounded-2xl bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-amber-300 transition-all"
+            className="px-6 py-2.5 rounded-xl bg-white text-slate-950 font-semibold text-xs uppercase tracking-wider shadow-md hover:bg-white/90 transition-all"
           >
-            Sign In Now
+            Sign In
           </button>
         </div>
       )}

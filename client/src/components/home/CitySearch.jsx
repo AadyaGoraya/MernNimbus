@@ -85,8 +85,8 @@ export default function CitySearch() {
             onFocus={() => {
               if (results.length > 0) setIsOpen(true);
             }}
-            placeholder="Search any city or vibe (e.g. Kyoto 🌸, Paris 🥐, Honolulu 🌺)..."
-            className="w-full pl-11 pr-10 py-3 rounded-2xl glass-panel text-white placeholder-white/50 text-xs sm:text-sm font-medium outline-none focus:border-white/40 shadow-lg transition-all"
+            placeholder="Search city, region, or coordinates (e.g. Tokyo, London, Reykjavik)..."
+            className="w-full pl-11 pr-10 py-3 rounded-2xl glass-panel text-white placeholder-slate-400 text-xs sm:text-sm font-medium outline-none focus:border-white/20 shadow-lg transition-all"
           />
           {isLoading && (
             <Loader2 className="absolute right-4 w-4 h-4 text-white/60 animate-spin" />

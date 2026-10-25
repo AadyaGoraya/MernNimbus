@@ -35,34 +35,34 @@ export default function InsightsPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6">
       {/* Header */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-amber-300 mb-1">
-          <BarChart3 className="w-4 h-4" />
-          <span>Your Sky Wrapped 🎧</span>
+      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-semibold text-white/50 mb-1">
+          <BarChart3 className="w-4 h-4 text-white/70" />
+          <span>Atmospheric Analytics</span>
         </div>
         <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-wide">
-          Weather & Soundscape History
+          Atmospheric Listening Breakdown
         </h1>
-        <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-xl">
-          What vibe do you live in? Here is your personalized breakdown of planetary atmospheres and soundtracks you’ve explored.
+        <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl">
+          Historical breakdown of planetary atmospheres, recurring weather modes, and soundscapes explored.
         </p>
       </div>
 
       {/* Guest Mode Gate */}
       {!isAuthenticated && (
-        <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-amber-400/30 shadow-xl">
-          <Activity className="w-10 h-10 text-amber-300 mx-auto mb-3" />
+        <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-white/10 shadow-xl">
+          <Activity className="w-10 h-10 text-white/60 mx-auto mb-3" />
           <h2 className="font-serif text-xl sm:text-2xl font-light text-white mb-2">
-            Sign In to Unlock Your Sky Wrapped
+            Sign In for Atmospheric Analytics
           </h2>
-          <p className="text-xs sm:text-sm text-white/70 max-w-md mx-auto mb-6">
-            Log in to see your full donut chart breakdown, top weather vibes, and global listening stats!
+          <p className="text-xs sm:text-sm text-white/60 max-w-md mx-auto mb-6">
+            Log in to view distribution models, recurring climate profiles, and personalized soundscape history.
           </p>
           <button
             onClick={() => promptLogin('view your weather listening insights')}
-            className="px-6 py-3 rounded-2xl bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-amber-300 transition-all"
+            className="px-6 py-2.5 rounded-xl bg-white text-slate-950 font-semibold text-xs uppercase tracking-wider shadow-md hover:bg-white/90 transition-all"
           >
-            Sign In Now
+            Sign In
           </button>
         </div>
       )}
@@ -70,22 +70,22 @@ export default function InsightsPage() {
       {/* Authenticated Insights View */}
       {isAuthenticated && (
         <div className="space-y-6">
-          {/* Fun Highlight Banner */}
-          <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl relative overflow-hidden bg-gradient-to-r from-amber-500/20 via-sky-500/20 to-purple-500/20">
+          {/* Highlight Banner */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl relative overflow-hidden bg-white/[0.03]">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] uppercase tracking-wider font-bold text-amber-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Main Character Weather Mode ✨</span>
+                <span className="text-[11px] uppercase tracking-wider font-semibold text-white/50 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-white/70" />
+                  <span>Dominant Climate Signature</span>
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-light text-white mt-1">
-                  {stats?.insightLine || 'Analyzing your mood frequency...'}
+                  {stats?.insightLine || 'Analyzing meteorological patterns...'}
                 </h2>
               </div>
-              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 border border-white/20 shrink-0">
-                <Music className="w-4 h-4 text-amber-300" />
-                <span className="text-xs font-semibold text-white">
-                  {stats?.totalListens || 0} Mood Sessions Spun 💿
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5 border border-white/10 shrink-0">
+                <Music className="w-4 h-4 text-white/70" />
+                <span className="text-xs font-medium text-white/90">
+                  {stats?.totalListens || 0} Sessions Recorded
                 </span>
               </div>
             </div>
@@ -94,16 +94,16 @@ export default function InsightsPage() {
           {/* 2-Column Grid: Donut Chart + Breakdown List */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             {/* Donut Chart Card */}
-            <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
+            <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl">
               <h3 className="font-serif text-xl font-light text-white mb-2">
-                Atmospheric Mood Distribution
+                Atmospheric Distribution
               </h3>
-              <p className="text-xs text-white/70 mb-6">
-                Relative percentage of weather states experienced through your soundscape.
+              <p className="text-xs text-white/60 mb-6">
+                Relative percentage of weather conditions experienced across your soundscape sessions.
               </p>
 
               {isLoading ? (
-                <div className="h-64 rounded-2xl bg-white/10 animate-pulse" />
+                <div className="h-64 rounded-2xl bg-white/5 animate-pulse" />
               ) : stats?.breakdown && stats.breakdown.length > 0 ? (
                 <div className="h-72 w-full relative flex items-center justify-center">
                   <ResponsiveContainer width="100%" height="100%">
@@ -122,7 +122,7 @@ export default function InsightsPage() {
                           <Cell
                             key={entry.mood}
                             fill={entry.color}
-                            stroke="rgba(255,255,255,0.2)"
+                            stroke="rgba(255,255,255,0.15)"
                             strokeWidth={1}
                           />
                         ))}
@@ -132,12 +132,12 @@ export default function InsightsPage() {
                           if (active && payload && payload.length) {
                             const d = payload[0].payload;
                             return (
-                              <div className="glass-panel p-3 rounded-xl border border-white/25 shadow-xl text-xs text-white">
-                                <div className="font-bold capitalize text-amber-300">
+                              <div className="glass-panel p-3 rounded-xl border border-white/20 shadow-xl text-xs text-white">
+                                <div className="font-semibold capitalize text-white">
                                   {d.mood.replace('-', ' ')}
                                 </div>
-                                <div>Count: {d.count} sessions</div>
-                                <div className="text-sky-300 font-bold">{d.percentage}% of time</div>
+                                <div className="text-white/60 text-[11px] mt-0.5">Sessions: {d.count}</div>
+                                <div className="text-white font-mono font-semibold text-xs mt-1">{d.percentage}% of distribution</div>
                               </div>
                             );
                           }
@@ -152,25 +152,25 @@ export default function InsightsPage() {
                     <div className="text-2xl font-bold font-serif text-white">
                       {stats.totalListens}
                     </div>
-                    <div className="text-[10px] uppercase tracking-wider text-white/60">
-                      Plays
+                    <div className="text-[10px] uppercase tracking-wider text-white/50">
+                      Sessions
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="py-12 text-center text-xs text-white/60">
-                  No mood logs available yet. Search cities on the Sky page to build your chart!
+                <div className="py-12 text-center text-xs text-white/50">
+                  No atmospheric telemetry recorded yet. Search cities on the forecast map to build history.
                 </div>
               )}
             </div>
 
             {/* Breakdown Table Card */}
-            <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
+            <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl">
               <h3 className="font-serif text-xl font-light text-white mb-2">
-                Detailed Frequency Logs
+                Meteorological Frequency Logs
               </h3>
-              <p className="text-xs text-white/70 mb-5">
-                Aggregated by MongoDB $group pipeline with city count metrics.
+              <p className="text-xs text-white/60 mb-5">
+                Aggregated distribution breakdown across recorded cities and environments.
               </p>
 
               <div className="space-y-3">

@@ -10,7 +10,7 @@ async function startServer() {
 
     const server = app.listen(PORT, () => {
       console.log(` Running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-      console.log(` API available at http://localhost:${PORT}/api/v1`);
+     
     });
 
     // Graceful shutdown handling

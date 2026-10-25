@@ -1,25 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Music, Headphones, Flame, Disc3 } from 'lucide-react';
+import { Compass, Music2 } from 'lucide-react';
 import { useWeather } from '../../context/WeatherContext';
 import Equalizer from '../common/Equalizer';
 
-const TRENDING_SKIES = [
-  { name: 'Tokyo', country: 'Japan', lat: 35.6762, lon: 139.6503, timezone: 'Asia/Tokyo', emoji: '🌸' },
-  { name: 'London', country: 'United Kingdom', lat: 51.5074, lon: -0.1278, timezone: 'Europe/London', emoji: '☕' },
-  { name: 'Reykjavik', country: 'Iceland', lat: 64.1466, lon: -21.9426, timezone: 'Atlantic/Reykjavik', emoji: '🧊' },
-  { name: 'Dubai', country: 'United Arab Emirates', lat: 25.2048, lon: 55.2708, timezone: 'Asia/Dubai', emoji: '🌴' },
-  { name: 'New York', country: 'United States', lat: 40.7128, lon: -74.0060, timezone: 'America/New_York', emoji: '🗽' },
-  { name: 'Sydney', country: 'Australia', lat: -33.8688, lon: 151.2093, timezone: 'Australia/Sydney', emoji: '🏄' },
+const QUICK_CITIES = [
+  { name: 'Tokyo', country: 'Japan', lat: 35.6762, lon: 139.6503, timezone: 'Asia/Tokyo' },
+  { name: 'London', country: 'United Kingdom', lat: 51.5074, lon: -0.1278, timezone: 'Europe/London' },
+  { name: 'Reykjavik', country: 'Iceland', lat: 64.1466, lon: -21.9426, timezone: 'Atlantic/Reykjavik' },
+  { name: 'Dubai', country: 'United Arab Emirates', lat: 25.2048, lon: 55.2708, timezone: 'Asia/Dubai' },
+  { name: 'New York', country: 'United States', lat: 40.7128, lon: -74.0060, timezone: 'America/New_York' },
+  { name: 'Sydney', country: 'Australia', lat: -33.8688, lon: 151.2093, timezone: 'Australia/Sydney' },
 ];
 
-const VIBE_SHORTCUTS = [
-  { id: 'clear-day', label: 'Golden Hour', emoji: '☀️' },
-  { id: 'rain', label: 'Rainy Cafe', emoji: '🌧️' },
-  { id: 'clear-night', label: '2 AM Drive', emoji: '🌙' },
-  { id: 'thunderstorm', label: 'Storm Electric', emoji: '⚡' },
-  { id: 'snow', label: 'Winter Chill', emoji: '❄️' },
-  { id: 'partly-cloudy', label: 'Breezy Daydream', emoji: '☁️' },
+const MOOD_FILTERS = [
+  { id: 'clear-day', label: 'Clear' },
+  { id: 'rain', label: 'Rain' },
+  { id: 'thunderstorm', label: 'Storm' },
+  { id: 'snow', label: 'Snow' },
+  { id: 'partly-cloudy', label: 'Overcast' },
+  { id: 'clear-night', label: 'Night' },
 ];
 
 export default function LandingHeroBanner() {
@@ -35,38 +35,23 @@ export default function LandingHeroBanner() {
   const currentTrack = playlistData?.tracks?.[0];
 
   return (
-    <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl relative overflow-hidden my-4 bg-gradient-to-br from-white/10 via-black/20 to-white/5">
-      {/* Background radial glow */}
-      <div
-        className="absolute -right-24 -bottom-24 w-72 h-72 rounded-full blur-3xl opacity-35 pointer-events-none"
-        style={{ background: 'var(--accent)' }}
-      />
-
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        {/* Left Side: Punchy Headline & Copy */}
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/30 text-amber-300 text-xs font-bold uppercase tracking-wider mb-3">
-            <Headphones className="w-3.5 h-3.5" />
-            <span>The Sky Sets The Aux Cord</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-ping" />
+    <div className="glass-panel rounded-3xl p-5 sm:p-6 border border-white/[0.08] relative overflow-hidden my-4 shadow-xl">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+        {/* Left: Purposeful Title & City Quick-Select */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="text-[11px] uppercase font-mono tracking-wider text-slate-400 font-semibold">
+              Live Atmosphere & Soundtrack Sync
+            </span>
           </div>
 
-          <h1 className="heading-fraunces text-3xl sm:text-5xl font-light text-white leading-tight tracking-tight">
-            Soundtracks Tuned to the Weather.
-          </h1>
-
-          <p className="text-xs sm:text-sm text-white/80 mt-2 leading-relaxed max-w-xl">
-            Cloudy with a chance of mellow indie. Torrential downpour with cozy lo-fi.
-            Pick any city on Earth and watch your screen and mixtape transform with the clouds.
-          </p>
-
-          {/* Quick Trending Cities Carousel */}
-          <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 flex items-center gap-1">
-              <Flame className="w-3 h-3 text-amber-400" />
-              <span>Tap a city:</span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs text-slate-400 flex items-center gap-1.5 font-medium mr-1">
+              <Compass className="w-3.5 h-3.5" />
+              <span>Explore:</span>
             </span>
-            {TRENDING_SKIES.map((city) => {
+            {QUICK_CITIES.map((city) => {
               const isActive = currentCity?.name === city.name;
               return (
                 <button
@@ -81,83 +66,58 @@ export default function LandingHeroBanner() {
                       timezone: city.timezone,
                     })
                   }
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${isActive
-                      ? 'bg-amber-400 text-slate-950 font-bold shadow-md scale-105'
-                      : 'bg-white/10 hover:bg-white/20 text-white/90 hover:scale-102'
-                    }`}
+                  className={`px-3 py-1 rounded-xl text-xs font-medium transition-all ${
+                    isActive
+                      ? 'bg-white text-slate-950 font-semibold shadow-sm'
+                      : 'bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white border border-white/[0.05]'
+                  }`}
                 >
-                  <span>{city.emoji}</span>
-                  <span>{city.name}</span>
+                  {city.name}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Right Side: "Now Spinning" Mini Player Card */}
-        <div className="lg:w-80 p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/20 shadow-2xl backdrop-blur-xl flex flex-col justify-between shrink-0">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-1.5">
-              <Disc3 className="w-3.5 h-3.5 text-amber-300 animate-spin-slow" />
-              <span>Sky Mixtape</span>
-            </span>
-            <Equalizer isPlaying={true} className="h-4" />
-          </div>
-
-          <div className="mb-3 flex items-center gap-3">
-            {currentTrack?.coverUrl && (
-              <a
-                href={currentTrack.appleMusicUrl || currentTrack.spotifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-12 h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg shrink-0 group block"
-                title={`Listen to ${currentTrack.title}`}
-              >
+        {/* Right: Integrated Audio Now Playing & Atmospheric Mode Override */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:border-l lg:border-white/[0.08] lg:pl-6 shrink-0">
+          {/* Track Snippet */}
+          {currentTrack && (
+            <div className="flex items-center gap-3">
+              {currentTrack.coverUrl && (
                 <img
                   src={currentTrack.coverUrl}
                   alt={currentTrack.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                  className="w-10 h-10 rounded-lg object-cover border border-white/[0.1] shadow"
                 />
-              </a>
-            )}
-            <div className="truncate min-w-0">
-              <div className="text-[11px] text-white/60 font-medium">Currently Playing Vibe:</div>
-              <a
-                href={currentTrack?.appleMusicUrl || currentTrack?.spotifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm font-bold text-white hover:text-amber-300 transition-colors truncate block mt-0.5"
-                title={`Open "${currentTrack?.title}" song`}
-              >
-                {currentTrack ? `"${currentTrack.title}"` : 'Selecting Track...'}
-              </a>
-              <div className="text-[11px] text-amber-300 font-semibold truncate">
-                {currentTrack?.artist || effectiveMood.replace('-', ' ')}
+              )}
+              <div className="truncate max-w-[160px]">
+                <div className="text-[10px] uppercase font-mono text-slate-400">Atmospheric Lead</div>
+                <div className="text-xs font-semibold text-white truncate">{currentTrack.title}</div>
+                <div className="text-[11px] text-slate-400 truncate">{currentTrack.artist}</div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Quick Mood Shifter Pills */}
-          <div className="pt-2.5 border-t border-white/10">
-            <span className="text-[10px] text-white/50 uppercase font-bold block mb-1.5">
-              Quick Mood Jump:
-            </span>
-            <div className="grid grid-cols-3 gap-1.5">
-              {VIBE_SHORTCUTS.slice(0, 6).map((vibe) => (
+          {/* Clean Mood Selector */}
+          <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.06]">
+            {MOOD_FILTERS.map((mood) => {
+              const isActive = (forcedMood || effectiveMood) === mood.id;
+              return (
                 <button
-                  key={vibe.id}
-                  onClick={() => setForcedMood(vibe.id)}
-                  className={`px-2 py-1 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 transition-all ${(forcedMood || effectiveMood) === vibe.id
-                      ? 'bg-white/30 text-white border border-white/30'
-                      : 'bg-white/5 hover:bg-white/15 text-white/70 hover:text-white'
-                    }`}
+                  key={mood.id}
+                  onClick={() => setForcedMood(mood.id)}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                    isActive
+                      ? 'bg-white/[0.15] text-white shadow-sm'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
                 >
-                  <span>{vibe.emoji}</span>
-                  <span className="truncate">{vibe.label.split(' ')[0]}</span>
+                  {mood.label}
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --bg-from: #FF8A1C;
-  --bg-via: #FFAE33;
-  --bg-to: #38BDF8;
-  --accent: #FBBF24;
-  --accent-glow: rgba(251, 191, 36, 0.45);
-  --glass: rgba(15, 23, 42, 0.42);
-  --glass-border: rgba(255, 255, 255, 0.22);
-  --glass-hover: rgba(255, 255, 255, 0.32);
-  --text: #FFFFFF;
-  --text-muted: #E2E8F0;
-  --chart-stroke: #FBBF24;
-  --chart-fill: rgba(251, 191, 36, 0.25);
-  --badge-bg: rgba(251, 191, 36, 0.2);
+  --bg-from: #1E293B;
+  --bg-via: #0F172A;
+  --bg-to: #020617;
+  --accent: #F59E0B;
+  --accent-glow: rgba(245, 158, 11, 0.25);
+  --glass: rgba(10, 14, 23, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.16);
+  --text: #F8FAFC;
+  --text-muted: #94A3B8;
+  --chart-stroke: #F59E0B;
+  --chart-fill: rgba(245, 158, 11, 0.15);
+  --badge-bg: rgba(255, 255, 255, 0.06);
 }
 
 body {
@@ -25,17 +25,17 @@ body {
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #030712;
   overflow-x: hidden;
-  transition: color 0.6s ease;
+  transition: color 0.4s ease;
 }
 
-/* Glassmorphism Design Tokens */
+/* Studio-Grade Glass Panels */
 .glass-panel {
   background: var(--glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
-  transition: background 1.2s ease, border-color 0.4s ease, transform 0.25s ease;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.25s ease, background-color 0.4s ease;
 }
 
 .glass-panel:hover {
