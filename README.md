@@ -81,3 +81,7 @@ nimbus-weather-mood-playlist/
 │   │   └── utils/              # Weather code to mood mapper
 │   └── package.json
 └── package.json                # Root scripts (concurrent client & server orchestration)
+
+
+
+DEMO VIDEO-> https://drive.google.com/file/d/1NP79VXrC0rkAI7NtnLRRo94kI0q2Q0DD/view?usp=share_link
