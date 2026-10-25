@@ -39,21 +39,24 @@ Floating examiner/demo controller allowing instant manual override of moods for 
 
 Secure JWT authentication with bcrypt password hashing.
 Includes instant Demo Login and Guest Mode for seamless exploration.
+
 🛠️ Technology Stack
+
 Layer	Technologies
-Frontend	React 18, Vite, Tailwind CSS, Framer Motion, Recharts, Lucide React, React Router 6, React Hot Toast
 
-Visuals	HTML5 Canvas Particle Engine, Glassmorphism UI
+Frontend:	React 18, Vite, Tailwind CSS, Framer Motion, Recharts, Lucide React, React Router 6, React Hot Toast
 
-Backend	Node.js, Express.js, Mongoose (MongoDB ODM)
+Visuals:	HTML5 Canvas Particle Engine, Glassmorphism UI
 
-Data & Cache	Open-Meteo APIs (Forecast & Geocoding), Node-Cache (10-min TTL)
+Backend:	Node.js, Express.js, Mongoose (MongoDB ODM)
 
-Security	JWT (jsonwebtoken), Bcrypt.js, Helmet, Express Rate Limit, Zod validation
+Data & Cache:	Open-Meteo APIs (Forecast & Geocoding), Node-Cache (10-min TTL)
 
-Testing	Jest, Supertest, MongoMemoryServer
+Security:	JWT (jsonwebtoken), Bcrypt.js, Helmet, Express Rate Limit, Zod validation
 
-Dev Tooling	Concurrently, Nodemon
+Testing:	Jest, Supertest, MongoMemoryServer
+
+Dev: Tooling	Concurrently, Nodemon
 
 🏗️ Architecture & Project Structure
 text
