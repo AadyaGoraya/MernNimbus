@@ -81,11 +81,10 @@ export default function LandingHeroBanner() {
                       timezone: city.timezone,
                     })
                   }
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                    isActive
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${isActive
                       ? 'bg-amber-400 text-slate-950 font-bold shadow-md scale-105'
                       : 'bg-white/10 hover:bg-white/20 text-white/90 hover:scale-102'
-                  }`}
+                    }`}
                 >
                   <span>{city.emoji}</span>
                   <span>{city.name}</span>
@@ -125,11 +124,10 @@ export default function LandingHeroBanner() {
                 <button
                   key={vibe.id}
                   onClick={() => setForcedMood(vibe.id)}
-                  className={`px-2 py-1 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 transition-all ${
-                    (forcedMood || effectiveMood) === vibe.id
+                  className={`px-2 py-1 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 transition-all ${(forcedMood || effectiveMood) === vibe.id
                       ? 'bg-white/30 text-white border border-white/30'
                       : 'bg-white/5 hover:bg-white/15 text-white/70 hover:text-white'
-                  }`}
+                    }`}
                 >
                   <span>{vibe.emoji}</span>
                   <span className="truncate">{vibe.label.split(' ')[0]}</span>
