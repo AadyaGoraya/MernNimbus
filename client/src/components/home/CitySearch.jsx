@@ -85,7 +85,7 @@ export default function CitySearch() {
             onFocus={() => {
               if (results.length > 0) setIsOpen(true);
             }}
-            placeholder="Search any city or region (e.g. Kyoto, Reykjavik, Paris)..."
+            placeholder="Search any city or vibe (e.g. Kyoto 🌸, Paris 🥐, Honolulu 🌺)..."
             className="w-full pl-11 pr-10 py-3 rounded-2xl glass-panel text-white placeholder-white/50 text-xs sm:text-sm font-medium outline-none focus:border-white/40 shadow-lg transition-all"
           />
           {isLoading && (

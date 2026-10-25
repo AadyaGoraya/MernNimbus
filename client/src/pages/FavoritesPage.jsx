@@ -30,13 +30,13 @@ export default function FavoritesPage() {
         <div>
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-amber-300 mb-1">
             <Heart className="w-4 h-4 fill-amber-300" />
-            <span>Saved Horizons</span>
+            <span>Your Personal Vibe Vault 💖</span>
           </div>
           <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-wide">
-            Your Weather Vault
+            Saved Sky Mixtapes
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl">
-            Live satellite readings, custom nicknames, and one-tap atmospheric transitions for all your sanctuary cities.
+          <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-xl">
+            Live weather previews, custom nicknames, and 1-tap sonic teleports for your favorite places across the globe.
           </p>
         </div>
 

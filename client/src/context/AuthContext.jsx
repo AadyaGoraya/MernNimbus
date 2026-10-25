@@ -7,6 +7,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('nimbus_token'));
+  const [isGuest, setIsGuest] = useState(() => localStorage.getItem('nimbus_guest') === 'true');
   const [units, setUnits] = useState(() => localStorage.getItem('nimbus_units') || 'metric');
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -81,10 +82,18 @@ export function AuthProvider({ children }) {
     throw new Error('Registration failed');
   };
 
+  const enterAsGuest = () => {
+    localStorage.setItem('nimbus_guest', 'true');
+    setIsGuest(true);
+    toast.success('Welcome! Exploring Nimbus as Guest 🎧');
+  };
+
   const logout = () => {
     localStorage.removeItem('nimbus_token');
+    localStorage.removeItem('nimbus_guest');
     setToken(null);
     setUser(null);
+    setIsGuest(false);
     toast.success('Signed out. See you under the open sky!');
   };
 
@@ -116,12 +125,15 @@ export function AuthProvider({ children }) {
         token,
         units,
         isLoading,
+        isGuest,
+        hasAccess: Boolean((user && token) || isGuest),
         isAuthenticated: Boolean(user && token),
         isAuthModalOpen,
         authModalAction,
         login,
         register,
         logout,
+        enterAsGuest,
         updateUnits,
         promptLogin,
         closeAuthModal,

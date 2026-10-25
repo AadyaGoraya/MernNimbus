@@ -92,8 +92,19 @@ export default function WeatherHero() {
             <span className="px-3 py-1 rounded-xl bg-white/15 border border-white/20 capitalize font-semibold shadow-sm">
               {cur?.description || 'Atmospheric Sky'}
             </span>
-            <span className="text-white/75">
-              Feels like <strong className="text-white font-bold">{feelsLike}°</strong>
+            <span className="text-white/85 flex items-center gap-1.5">
+              <span>Feels like <strong className="text-white font-bold">{feelsLike}°</strong></span>
+              <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[11px] font-bold">
+                {rawTemp >= 30
+                  ? 'Iced latte weather 🧊'
+                  : rawTemp >= 21
+                  ? 'Prime t-shirt weather ✨'
+                  : rawTemp >= 14
+                  ? 'Cozy hoodie vibe ☕'
+                  : effectiveMood === 'rain'
+                  ? 'Raindrop chill 🌧️'
+                  : 'Bundle up warm 🧣'}
+              </span>
             </span>
             <div className="flex items-center gap-2 text-white/80">
               <span className="inline-flex items-center text-amber-300">

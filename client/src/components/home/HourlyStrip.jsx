@@ -36,10 +36,10 @@ export default function HourlyStrip() {
             <TrendingUp className="w-4 h-4" />
           </div>
           <h3 className="font-serif text-lg sm:text-xl font-light text-white tracking-wide">
-            24-Hour Horizon & Trajectory
+            Today's Sky Wave & Hourly Curve 📈
           </h3>
         </div>
-        <span className="text-xs text-white/60 font-medium">Hourly Timeline</span>
+        <span className="text-xs text-white/60 font-medium">Next 24 Hours</span>
       </div>
 
       {/* Horizontally Scrollable 24h Cards */}

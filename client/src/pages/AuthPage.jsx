@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, Sparkles, Cloud, Music, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Mail, Lock, User, Sparkles, Cloud, Music, ShieldCheck, ArrowRight, Headphones } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import WeatherIcon from '../components/common/WeatherIcon';
 
 export default function AuthPage() {
-  const { login, register, isAuthenticated } = useAuth();
+  const { login, register, isAuthenticated, enterAsGuest } = useAuth();
   const navigate = useNavigate();
 
   const [isRegister, setIsRegister] = useState(false);
@@ -83,42 +83,42 @@ export default function AuthPage() {
                   NIMBUS
                 </span>
                 <span className="text-[10px] tracking-wider uppercase text-amber-300 font-bold">
-                  Atmospheric Audio Experience
+                  The Weather Mixtape 🎵
                 </span>
               </div>
             </div>
 
             <h2 className="heading-fraunces text-3xl sm:text-4xl font-light text-white leading-tight mb-4">
-              Where the Sky Shapes Your Sound.
+              The Sky Has the Aux Cord.
             </h2>
             <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-md">
-              Synchronize your daily focus and wandering thoughts with real-time planetary weather patterns and curated soundtrack moodscapes.
+              Life’s too short for boring weather apps. Rainy afternoons get moody indie lo-fi, golden sunsets get acoustic warmth, and midnight storms get electric bass. Let the clouds pick your vibe.
             </p>
           </div>
 
           {/* Features Highlights */}
           <div className="relative z-10 my-8 space-y-3.5">
             <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
-              <Sparkles className="w-5 h-5 text-amber-300 shrink-0" />
+              <Music className="w-5 h-5 text-amber-300 shrink-0" />
               <div className="text-xs text-white/90">
-                <strong className="text-white block font-semibold">Dynamic Canvas Engine</strong>
-                60fps rain, lightning, snow, stars and drifting fog particles.
+                <strong className="text-white block font-semibold">Real Tracks, Zero Fluff 💿</strong>
+                Curated songs for all 8 weather moods with 1-click Spotify & YouTube links.
               </div>
             </div>
 
             <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
-              <Music className="w-5 h-5 text-sky-300 shrink-0" />
+              <Sparkles className="w-5 h-5 text-sky-300 shrink-0" />
               <div className="text-xs text-white/90">
-                <strong className="text-white block font-semibold">Mood-Synchronized Playlists</strong>
-                8 real curated tracks per sky state with Spotify and YouTube links.
+                <strong className="text-white block font-semibold">Living Sky Visualizer 🎨</strong>
+                Smooth 60fps canvas particles of rain, lightning strikes, snow, and stars.
               </div>
             </div>
 
             <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 border border-white/15">
               <ShieldCheck className="w-5 h-5 text-emerald-300 shrink-0" />
               <div className="text-xs text-white/90">
-                <strong className="text-white block font-semibold">Encrypted Vault Storage</strong>
-                Save personalized cities and track your historical weather donut analytics.
+                <strong className="text-white block font-semibold">Your Personal Vibe Vault 💖</strong>
+                Save favorite cities, give them nicknames, and unlock "Sky Wrapped" analytics.
               </div>
             </div>
           </div>
@@ -128,12 +128,12 @@ export default function AuthPage() {
             <div className="flex items-center gap-2.5">
               <WeatherIcon mood="clear-day" className="w-6 h-6 text-amber-300" />
               <div>
-                <div className="text-xs font-bold text-white">Live Open-Meteo Integration</div>
-                <div className="text-[10px] text-white/60">Sub-millisecond node-cache proxy</div>
+                <div className="text-xs font-bold text-white">Live Worldwide Weather Vibe</div>
+                <div className="text-[10px] text-white/60">Synced with real-time satellites 🛰️</div>
               </div>
             </div>
             <span className="text-[11px] font-mono text-emerald-400 font-bold px-2 py-0.5 rounded-full bg-emerald-500/20">
-              OPERATIONAL
+              AUX LIVE
             </span>
           </div>
         </div>
@@ -284,9 +284,24 @@ export default function AuthPage() {
                 <Sparkles className="w-3.5 h-3.5 text-amber-300" />
                 <span>Autofill Demo Credentials</span>
               </button>
-              <p className="text-[11px] text-white/50 mt-2">
+              <p className="text-[11px] text-white/50 mt-1.5">
                 demo@nimbus.app / NimbusDemo2026!
               </p>
+
+              {/* Guest Exploration Option */}
+              <div className="mt-4 pt-4 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => {
+                    enterAsGuest();
+                    navigate('/');
+                  }}
+                  className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/15 text-white/90 text-xs font-semibold border border-white/15 transition-all flex items-center justify-center gap-2 group hover:border-white/30"
+                >
+                  <Headphones className="w-3.5 h-3.5 text-amber-300 group-hover:rotate-12 transition-transform" />
+                  <span>Explore as Guest (Skip Login for Now) →</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

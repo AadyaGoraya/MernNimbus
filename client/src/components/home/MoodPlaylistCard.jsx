@@ -4,6 +4,8 @@ import { Music, Shuffle, ExternalLink, Play, Disc } from 'lucide-react';
 import { useWeather } from '../../context/WeatherContext';
 import { PlaylistSkeleton } from '../common/Skeleton';
 
+import Equalizer from '../common/Equalizer';
+
 export default function MoodPlaylistCard() {
   const {
     playlistData,
@@ -36,14 +38,15 @@ export default function MoodPlaylistCard() {
             <div className="p-1.5 rounded-lg bg-amber-400/20 text-amber-300">
               <Music className="w-4 h-4" />
             </div>
-            <span className="text-xs uppercase tracking-wider font-bold text-amber-300">
-              Atmospheric Soundscape
+            <span className="text-xs uppercase tracking-wider font-bold text-amber-300 flex items-center gap-2">
+              <span>Sky Mixtape • 8 Curated Tracks</span>
+              <Equalizer isPlaying={true} className="h-3" />
             </span>
           </div>
-          <h3 className="font-serif text-xl sm:text-2xl font-light text-white tracking-wide">
+          <h3 className="font-serif text-xl sm:text-2xl font-light text-white tracking-wide capitalize">
             {effectiveMood.replace('-', ' ')} Vibe
           </h3>
-          <p className="text-xs sm:text-sm text-white/80 italic mt-0.5 font-serif">
+          <p className="text-xs sm:text-sm text-white/90 italic mt-0.5 font-serif">
             "{playlistData.tagline}"
           </p>
         </div>

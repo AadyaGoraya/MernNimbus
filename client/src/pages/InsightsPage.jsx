@@ -38,13 +38,13 @@ export default function InsightsPage() {
       <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-amber-300 mb-1">
           <BarChart3 className="w-4 h-4" />
-          <span>Atmospheric Intelligence</span>
+          <span>Your Sky Wrapped 🎧</span>
         </div>
         <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-wide">
-          Your Weather History
+          Weather & Soundscape History
         </h1>
-        <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl">
-          Aggregated MongoDB analytics calculated from your listening history across global skies.
+        <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-xl">
+          What vibe do you live in? Here is your personalized breakdown of planetary atmospheres and soundtracks you’ve explored.
         </p>
       </div>
 
@@ -53,10 +53,10 @@ export default function InsightsPage() {
         <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-amber-400/30 shadow-xl">
           <Activity className="w-10 h-10 text-amber-300 mx-auto mb-3" />
           <h2 className="font-serif text-xl sm:text-2xl font-light text-white mb-2">
-            Sign In to View Your Mood History
+            Sign In to Unlock Your Sky Wrapped
           </h2>
           <p className="text-xs sm:text-sm text-white/70 max-w-md mx-auto mb-6">
-            Log in with your Nimbus account or the demo account to view your live donut aggregation and sky profile.
+            Log in to see your full donut chart breakdown, top weather vibes, and global listening stats!
           </p>
           <button
             onClick={() => promptLogin('view your weather listening insights')}
@@ -76,7 +76,7 @@ export default function InsightsPage() {
               <div>
                 <span className="text-[11px] uppercase tracking-wider font-bold text-amber-300 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Primary Mood Affinity</span>
+                  <span>Main Character Weather Mode ✨</span>
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-light text-white mt-1">
                   {stats?.insightLine || 'Analyzing your mood frequency...'}
@@ -85,7 +85,7 @@ export default function InsightsPage() {
               <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 border border-white/20 shrink-0">
                 <Music className="w-4 h-4 text-amber-300" />
                 <span className="text-xs font-semibold text-white">
-                  {stats?.totalListens || 0} Total Sessions Logged
+                  {stats?.totalListens || 0} Mood Sessions Spun 💿
                 </span>
               </div>
             </div>

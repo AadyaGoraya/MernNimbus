@@ -12,8 +12,10 @@ import InsightsPage from './pages/InsightsPage';
 import AuthPage from './pages/AuthPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useWeather } from './context/WeatherContext';
+import { useAuth } from './context/AuthContext';
 
 export default function App() {
+  const { hasAccess } = useAuth();
   const {
     effectiveMood,
     forcedMood,
@@ -21,6 +23,44 @@ export default function App() {
     resetForcedMood,
     weatherData,
   } = useWeather();
+
+  // If user is not logged in and hasn't chosen guest mode, present the Login Landing Page first
+  if (!hasAccess) {
+    return (
+      <div className="relative min-h-screen flex flex-col antialiased justify-center">
+        <WeatherCanvas mood={effectiveMood} />
+        <div className="flex-1 flex items-center justify-center p-4">
+          <AuthPage />
+        </div>
+        <DemoMoodSwitcher
+          currentMood={weatherData?.mood || 'clear-day'}
+          forcedMood={forcedMood}
+          onSelectMood={setForcedMood}
+          onReset={resetForcedMood}
+        />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: 'rgba(15, 23, 42, 0.88)',
+              backdropFilter: 'blur(16px)',
+              color: '#FFFFFF',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '1rem',
+              padding: '0.75rem 1.25rem',
+              fontSize: '0.8125rem',
+            },
+            success: {
+              iconTheme: {
+                primary: '#FBBF24',
+                secondary: '#0F172A',
+              },
+            },
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen flex flex-col antialiased">

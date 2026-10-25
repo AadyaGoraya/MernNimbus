@@ -9,33 +9,33 @@ import { THEME_PALETTES } from '../utils/themePalettes';
 import WeatherIcon from '../components/common/WeatherIcon';
 
 /**
- * Generate a smart "Dress for it" tip based on temperature (Celsius) and atmospheric mood
+ * Generate a witty & stylish "Fit Check" tip based on temperature (Celsius) and atmospheric mood
  */
 function getDressTip(celsius, mood = 'clear-day') {
   if (mood === 'thunderstorm') {
-    return 'Heavy-duty waterproof shell, waterproof boots, and stay sheltered from lightning.';
+    return 'Black leather jacket or techwear shell, noise-cancelling headphones on blast, and stay sheltered ⚡';
   }
   if (mood === 'rain') {
-    return 'Waterproof trench coat, sturdy walking boots, and a wind-resistant umbrella.';
+    return 'Oversized trench coat, chunky waterproof boots, umbrella, and a melancholy indie playlist 🌧️';
   }
   if (mood === 'snow') {
-    return 'Down parka, merino wool thermal base layers, knit beanie, and insulated gloves.';
+    return 'Puffer jacket, oversized cashmere scarf, fleece beanie, and a hot flat white in hand ❄️';
   }
   if (mood === 'fog') {
-    return 'Reflective outer layer, cozy knit sweater, and moisture-wicking trousers.';
+    return 'Dark academia wool overcoat, cozy ribbed turtleneck, and main-character mystery energy 🌫️';
   }
 
   // Temperature based tips for clear / cloudy
   if (celsius >= 30) {
-    return 'Ultra-light breathable linen, polarized UV sunglasses, and light cotton sneakers.';
+    return 'Loose breathable linen, vintage sunglasses, iced cold brew, and breezy summer bops ☀️';
   } else if (celsius >= 22) {
-    return 'Short sleeves, relaxed cotton chinos, and comfortable sneakers.';
+    return 'Graphic tee, relaxed denim, clean sneakers, and pure golden hour energy ✨';
   } else if (celsius >= 15) {
-    return 'Light windbreaker, denim jacket, or a breathable pullover over a t-shirt.';
+    return 'Comfy oversized hoodie or bomber jacket over a tee. Peak music walk weather ☕';
   } else if (celsius >= 8) {
-    return 'Wool coat, medium knit sweater, and warm leather shoes.';
+    return 'Heavy wool trench, chunky knit sweater, Chelsea boots, and warm vibes 🧣';
   } else {
-    return 'Heavy winter jacket, thick scarf, thermal socks, and insulated footwear.';
+    return 'Full winter armor: heavy down parka, thermal base layers, and zero exposed skin 🧊';
   }
 }
 
@@ -116,13 +116,13 @@ export default function ComparePage() {
       <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 shadow-xl">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-amber-300 mb-1">
           <SplitSquareVertical className="w-4 h-4" />
-          <span>Atmospheric Comparison</span>
+          <span>Vibe Clash ⚡</span>
         </div>
         <h1 className="heading-fraunces text-2xl sm:text-4xl font-light text-white tracking-wide">
-          Compare Horizons
+          City vs City
         </h1>
-        <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl">
-          Side-by-side atmospheric inspection. Compare live temperatures, cloud density, and smart wardrobe recommendations across 2 to 3 cities.
+        <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-xl">
+          Side-by-side weather & soundtrack faceoff. Check the vibe, the temp, and the fit check before packing your bag.
         </p>
 
         {/* City Selector Pills */}
@@ -271,7 +271,7 @@ export default function ComparePage() {
                 <div className="mt-6 pt-4 border-t border-white/15">
                   <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider font-bold text-amber-300 mb-1.5">
                     <Shirt className="w-3.5 h-3.5" />
-                    <span>Dress For It</span>
+                    <span>The Fit Check</span>
                   </div>
                   <p className="text-xs text-white/90 leading-relaxed font-medium bg-black/20 p-3 rounded-2xl border border-white/10">
                     "{dressTip}"

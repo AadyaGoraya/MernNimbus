@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import CitySearch from '../components/home/CitySearch';
+import LandingHeroBanner from '../components/home/LandingHeroBanner';
 import WeatherHero from '../components/home/WeatherHero';
 import StatChips from '../components/home/StatChips';
 import HourlyStrip from '../components/home/HourlyStrip';
@@ -31,6 +32,9 @@ export default function HomePage() {
     <main className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       {/* Search Header */}
       <CitySearch />
+
+      {/* Hero Welcome & Vibe Banner */}
+      <LandingHeroBanner />
 
       {/* Weather Content */}
       {isLoading ? (

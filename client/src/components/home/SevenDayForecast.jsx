@@ -32,10 +32,10 @@ export default function SevenDayForecast() {
             <Calendar className="w-4 h-4" />
           </div>
           <h3 className="font-serif text-lg sm:text-xl font-light text-white tracking-wide">
-            7-Day Sky Outlook
+            7-Day Weather Outlook 📅
           </h3>
         </div>
-        <span className="text-xs text-white/60 font-medium">Daily Forecast</span>
+        <span className="text-xs text-white/60 font-medium">The Week Ahead</span>
       </div>
 
       <div className="space-y-2.5">
