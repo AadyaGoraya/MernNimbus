@@ -9,8 +9,7 @@ async function startServer() {
     await connectDB();
 
     const server = app.listen(PORT, () => {
-      console.log(` Running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-     
+      console.log(`[NIMBUS Server] Live on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
     });
 
     // Graceful shutdown handling
