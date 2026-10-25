@@ -10,8 +10,9 @@ const AppError = require('../utils/appError');
 const getPlaylist = asyncHandler(async (req, res) => {
   const mood = req.query.mood || 'clear-day';
   const isDay = req.query.isDay === undefined ? 1 : req.query.isDay === 'true' || req.query.isDay === '1';
+  const refresh = req.query.refresh === 'true' || req.query.refresh === '1';
 
-  const playlist = getPlaylistForMood(mood, isDay);
+  const playlist = getPlaylistForMood(mood, isDay, refresh);
 
   res.status(200).json({
     success: true,

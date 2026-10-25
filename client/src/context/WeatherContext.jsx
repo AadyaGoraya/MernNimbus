@@ -36,11 +36,12 @@ export function WeatherProvider({ children }) {
     applyThemeVariables(effectiveMood);
   }, [effectiveMood]);
 
-  // Fetch playlist for current mood
-  const fetchPlaylist = useCallback(async (moodToUse, isDay = true) => {
+  // Fetch playlist for current mood with rotation/refresh support
+  const fetchPlaylist = useCallback(async (moodToUse, isDay = true, forceRefresh = false) => {
     setIsPlaylistLoading(true);
     try {
-      const res = await api.get(`/playlist?mood=${encodeURIComponent(moodToUse)}&isDay=${isDay ? 1 : 0}`);
+      const refreshParam = forceRefresh ? '&refresh=true' : '';
+      const res = await api.get(`/playlist?mood=${encodeURIComponent(moodToUse)}&isDay=${isDay ? 1 : 0}${refreshParam}`);
       if (res.success && res.data) {
         setPlaylistData(res.data);
       }
@@ -50,6 +51,13 @@ export function WeatherProvider({ children }) {
       setIsPlaylistLoading(false);
     }
   }, []);
+
+  // Refresh current playlist with fresh songs
+  const refreshCurrentPlaylist = useCallback(async () => {
+    const isDaytime = weatherData?.current?.isDay ?? true;
+    await fetchPlaylist(effectiveMood, isDaytime, true);
+    toast.success('Updated playlist with fresh songs');
+  }, [effectiveMood, weatherData, fetchPlaylist]);
 
   // Fetch weather for a given city object
   const fetchWeatherForCity = useCallback(async (city) => {
@@ -363,6 +371,7 @@ export function WeatherProvider({ children }) {
         updateNickname,
         refreshFavorites: loadFavorites,
         shuffleVibeTrack,
+        refreshCurrentPlaylist,
       }}
     >
       {children}

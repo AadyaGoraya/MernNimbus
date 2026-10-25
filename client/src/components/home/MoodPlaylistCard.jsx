@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Music2, Shuffle, Play, Pause, ExternalLink } from 'lucide-react';
+import { Music2, Shuffle, Play, Pause, ExternalLink, RotateCw } from 'lucide-react';
 import { useWeather } from '../../context/WeatherContext';
 import { PlaylistSkeleton } from '../common/Skeleton';
 import Equalizer from '../common/Equalizer';
@@ -13,6 +13,7 @@ export default function MoodPlaylistCard() {
     setForcedMood,
     isPlaylistLoading,
     shuffleVibeTrack,
+    refreshCurrentPlaylist,
     highlightedTrack,
   } = useWeather();
 
@@ -79,7 +80,7 @@ export default function MoodPlaylistCard() {
         <div>
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             <span className="text-[11px] uppercase tracking-wider font-mono font-semibold text-slate-400">
-              Curated Soundtrack · 8 Tracks
+              Atmospheric Soundtrack · 8 of {playlistData.totalPoolSize || 18} Tracks in Rotation
             </span>
             {forcedMood && (
               <span className="text-[10px] uppercase font-mono font-semibold px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/20 text-amber-300">
@@ -96,14 +97,28 @@ export default function MoodPlaylistCard() {
           </p>
         </div>
 
-        {/* Shuffle Button */}
-        <button
-          onClick={shuffleVibeTrack}
-          className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 text-xs font-medium transition-all active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
-        >
-          <Shuffle className="w-3.5 h-3.5 text-slate-400" />
-          <span>Shuffle Track</span>
-        </button>
+        {/* Action Controls */}
+        <div className="flex items-center gap-2 self-start sm:self-auto shrink-0 flex-wrap">
+          {/* Refresh / Update Mix Button */}
+          <button
+            onClick={refreshCurrentPlaylist}
+            disabled={isPlaylistLoading}
+            title="Update playlist with a fresh rotation of tracks"
+            className="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.14] border border-white/[0.1] text-white text-xs font-medium transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+          >
+            <RotateCw className={`w-3.5 h-3.5 text-white/80 ${isPlaylistLoading ? 'animate-spin' : ''}`} />
+            <span>Update Songs</span>
+          </button>
+
+          {/* Shuffle Track Button */}
+          <button
+            onClick={shuffleVibeTrack}
+            className="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] text-slate-300 hover:text-white text-xs font-medium transition-all active:scale-95 cursor-pointer"
+          >
+            <Shuffle className="w-3.5 h-3.5 text-slate-400" />
+            <span>Pick Track</span>
+          </button>
+        </div>
       </div>
 
       {/* Track List */}

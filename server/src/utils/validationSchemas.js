@@ -89,6 +89,7 @@ const playlistQuerySchema = z.object({
   query: z.object({
     mood: z.string().optional(),
     isDay: z.string().optional(),
+    refresh: z.string().optional(),
   }),
 });
 
