@@ -55,6 +55,7 @@ export function WeatherProvider({ children }) {
   const fetchWeatherForCity = useCallback(async (city) => {
     setIsLoading(true);
     setWeatherError(null);
+    setForcedMood(null); // Return to live weather whenever a city is selected
 
     try {
       const res = await api.get(`/weather?lat=${city.lat}&lon=${city.lon}`);

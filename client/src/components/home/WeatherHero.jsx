@@ -7,7 +7,7 @@ import { formatTempNumber } from '../../utils/units';
 import WeatherIcon from '../common/WeatherIcon';
 
 export default function WeatherHero() {
-  const { currentCity, weatherData, effectiveMood } = useWeather();
+  const { currentCity, weatherData, effectiveMood, forcedMood, setForcedMood } = useWeather();
   const { units } = useAuth();
 
   const cur = weatherData?.current;
@@ -86,6 +86,18 @@ export default function WeatherHero() {
             <span className="px-3 py-1 rounded-xl bg-white/[0.06] border border-white/[0.08] capitalize font-semibold text-white">
               {cur?.description || 'Atmospheric Sky'}
             </span>
+
+            {forcedMood && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs font-medium">
+                <span>Simulation: {forcedMood.replace('-', ' ')}</span>
+                <button
+                  onClick={() => setForcedMood(null)}
+                  className="underline ml-1 hover:text-white cursor-pointer font-semibold"
+                >
+                  Return to Live
+                </button>
+              </span>
+            )}
 
             <span className="text-slate-400">
               Feels like <strong className="text-slate-200">{feelsLike}°</strong>

@@ -9,6 +9,8 @@ export default function MoodPlaylistCard() {
   const {
     playlistData,
     effectiveMood,
+    forcedMood,
+    setForcedMood,
     isPlaylistLoading,
     shuffleVibeTrack,
     highlightedTrack,
@@ -75,14 +77,19 @@ export default function MoodPlaylistCard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/[0.06]">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
+          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             <span className="text-[11px] uppercase tracking-wider font-mono font-semibold text-slate-400">
               Curated Soundtrack · 8 Tracks
             </span>
+            {forcedMood && (
+              <span className="text-[10px] uppercase font-mono font-semibold px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/20 text-amber-300">
+                Preview Mode
+              </span>
+            )}
             {playingTrackId && <Equalizer isPlaying={true} className="h-3 text-amber-400" />}
           </div>
-          <h3 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide capitalize">
-            {effectiveMood.replace('-', ' ')} Atmosphere
+          <h3 className="font-serif text-2xl sm:text-3xl font-light text-white tracking-wide capitalize flex items-baseline gap-2">
+            <span>{effectiveMood.replace('-', ' ')} Atmosphere</span>
           </h3>
           <p className="text-xs sm:text-sm text-slate-400 italic mt-0.5">
             "{playlistData.tagline}"

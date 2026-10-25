@@ -100,17 +100,32 @@ export default function LandingHeroBanner() {
             </div>
           )}
 
-          {/* Clean Mood Selector */}
+          {/* Clean Mood Selector with Live toggle */}
           <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.06]">
+            {/* Live Mode Button */}
+            <button
+              onClick={() => setForcedMood(null)}
+              title="Sync with real-time city weather"
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                !forcedMood
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${!forcedMood ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500'}`} />
+              <span>Live</span>
+            </button>
+
             {MOOD_FILTERS.map((mood) => {
-              const isActive = (forcedMood || effectiveMood) === mood.id;
+              const isActive = forcedMood === mood.id;
               return (
                 <button
                   key={mood.id}
-                  onClick={() => setForcedMood(mood.id)}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                  onClick={() => setForcedMood(forcedMood === mood.id ? null : mood.id)}
+                  title={isActive ? 'Click to return to live weather' : `Preview ${mood.label} atmosphere`}
+                  className={`px-2 py-1 rounded-lg text-[11px] font-medium transition-all ${
                     isActive
-                      ? 'bg-white/[0.15] text-white shadow-sm'
+                      ? 'bg-white text-slate-950 font-semibold shadow-sm'
                       : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
@@ -121,6 +136,24 @@ export default function LandingHeroBanner() {
           </div>
         </div>
       </div>
+
+      {/* Atmospheric Override Notice Banner */}
+      {forcedMood && (
+        <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-amber-300/90 flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            <span>
+              Atmospheric preview active: <strong className="capitalize">{forcedMood.replace('-', ' ')}</strong> (Overriding live {currentCity?.name} weather)
+            </span>
+          </div>
+          <button
+            onClick={() => setForcedMood(null)}
+            className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-[11px] transition-colors border border-white/10"
+          >
+            Reset to Live Weather
+          </button>
+        </div>
+      )}
     </div>
   );
 }
